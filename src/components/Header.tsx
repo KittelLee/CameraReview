@@ -1,5 +1,5 @@
 function Header() {
-  return <div className="p-2 font-bold text-red-500">Header</div>;
+  return <div className="p-4 font-bold text-red-500">Header</div>;
 }
 
 export default Header;
