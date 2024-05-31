@@ -1,7 +1,17 @@
 import "./globals.css";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./pages/Home";
 
 function App() {
-  return <div>hi</div>;
+  return (
+    <div className="App">
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
