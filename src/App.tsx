@@ -4,29 +4,29 @@ import Home from "./pages/Home";
 import { Review } from "./types/Review";
 
 function App() {
-  const [data, setData] = useState<Review[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL;
+    const fetchData = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const response = await fetch(`${apiUrl}/camera`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        setReviews(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-    fetch(`${apiUrl}/camera`)
-      .then((response) => response.json())
-      .then((data) => setData(data));
+    fetchData();
   }, []);
 
   return (
     <div className="App">
-      <h1>Camera Reviews</h1>
-      <ul>
-        {data.map((item) => (
-          <li key={item.id}>
-            <h2>{item.title}</h2>
-            <p>{item.content}</p>
-          </li>
-        ))}
-      </ul>
-
-      <Home />
+      <Home data={reviews} />
     </div>
   );
 }
