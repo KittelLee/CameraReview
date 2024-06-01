@@ -2,45 +2,310 @@
   "camera": [
     {
       "id": 1,
-      "title": "Review 1",
-      "content": "This is the first review"
+      "title": "캐논 EOS R100",
+      "content": "캐논 미러리스 보급기",
+      "price": "829,000원"
     },
     {
       "id": 2,
-      "title": "Review 2",
-      "content": "This is the second review"
+      "title": "캐논 EOS R50",
+      "content": "캐논 미러리스 보급기",
+      "price": "929,000원"
     },
     {
       "id": 3,
-      "title": "Review 3",
-      "content": "This is the first review"
+      "title": "캐논 EOS R10",
+      "content": "캐논 미러리스 중급기",
+      "price": "1,229,000원"
     },
     {
       "id": 4,
-      "title": "Review 4",
-      "content": "This is the first review"
+      "title": "캐논 EOS R8",
+      "content": "캐논 미러리스 중급기",
+      "price": "1,899,000원"
     },
     {
       "id": 5,
-      "title": "Review 5",
-      "content": "This is the first review"
+      "title": "캐논 EOS R7",
+      "content": "캐논 미러리스 중급기",
+      "price": "1,899,000원"
     },
     {
       "id": 6,
-      "title": "Review 6",
-      "content": "This is the first review"
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "name": "Lee",
-      "role": "developer"
+      "title": "캐논 EOS R6 mark2",
+      "content": "캐논 미러리스 중급기",
+      "price": "3,199,000원"
     },
     {
-      "id": 2,
-      "name": "Kim",
-      "role": "designer"
+      "id": 7,
+      "title": "캐논 EOS R5",
+      "content": "캐논 미러리스 중급기",
+      "price": "4,299,000원"
+    },
+    {
+      "id": 8,
+      "title": "캐논 EOS R3",
+      "content": "캐논 미러리스 고급기",
+      "price": "6,499,000원"
+    },
+    {
+      "id": 9,
+      "title": "캐논 EOS RP",
+      "content": "캐논 미러리스 중급기",
+      "price": "1,249,000원"
+    },
+    {
+      "id": 10,
+      "title": "소니 ZV-E10",
+      "content": "소니 미러리스 보급기",
+      "price": "848,000원"
+    },
+    {
+      "id": 11,
+      "title": "소니 ZV-E1",
+      "content": "소니 미러리스 중급기",
+      "price": "2,790,000원"
+    },
+    {
+      "id": 12,
+      "title": "소니 A6400",
+      "content": "소니 미러리스 중급기",
+      "price": "1,098,000원"
+    },
+    {
+      "id": 13,
+      "title": "소니 A6600",
+      "content": "소니 미러리스 중급기",
+      "price": "1,799,000원"
+    },
+    {
+      "id": 14,
+      "title": "소니 A6700",
+      "content": "소니 미러리스 중급기",
+      "price": "1,890,000원"
+    },
+    {
+      "id": 15,
+      "title": "소니 A7C",
+      "content": "소니 미러리스 중급기",
+      "price": "2,199,000원"
+    },
+    {
+      "id": 16,
+      "title": "소니 A7C2",
+      "content": "소니 미러리스 중급기",
+      "price": "2,599,000원"
+    },
+    {
+      "id": 17,
+      "title": "소니 A7CR",
+      "content": "소니 미러리스 중급기",
+      "price": "3,790,000원"
+    },
+    {
+      "id": 18,
+      "title": "소니 A7M2",
+      "content": "소니 미러리스 중급기",
+      "price": "1,599,000원"
+    },
+    {
+      "id": 19,
+      "title": "소니 A7M3",
+      "content": "소니 미러리스 중급기",
+      "price": "2,499,000원"
+    },
+    {
+      "id": 20,
+      "title": "소니 A7M4",
+      "content": "소니 미러리스 중급기",
+      "price": "3,090,000원"
+    },
+    {
+      "id": 21,
+      "title": "소니 A7R3",
+      "content": "소니 미러리스 고급기",
+      "price": "3,090,000원"
+    },
+
+    {
+      "id": 22,
+      "title": "소니 A7R4",
+      "content": "소니 미러리스 고급기",
+      "price": "3,980,000원"
+    },
+    {
+      "id": 23,
+      "title": "소니 A7R5",
+      "content": "소니 미러리스 고급기",
+      "price": "5,290,000원"
+    },
+    {
+      "id": 24,
+      "title": "소니 A7S3",
+      "content": "소니 미러리스 고급기",
+      "price": "4,799,000원"
+    },
+    {
+      "id": 25,
+      "title": "소니 A9M2",
+      "content": "소니 미러리스 고급기",
+      "price": "5,999,000원"
+    },
+    {
+      "id": 26,
+      "title": "소니 A9M3",
+      "content": "소니 미러리스 고급기",
+      "price": "7,980,000원"
+    },
+    {
+      "id": 27,
+      "title": "소니 A1",
+      "content": "소니 미러리스 고급기",
+      "price": "7,980,000원"
+    },
+    {
+      "id": 28,
+      "title": "니콘 Z30",
+      "content": "니콘 미러리스 보급기",
+      "price": "880,000원"
+    },
+    {
+      "id": 29,
+      "title": "니콘 Z50",
+      "content": "니콘 미러리스 보급기",
+      "price": "1,100,000원"
+    },
+    {
+      "id": 30,
+      "title": "니콘 ZFC",
+      "content": "니콘 미러리스 보급기",
+      "price": "1,180,000원"
+    },
+    {
+      "id": 31,
+      "title": "니콘 ZF",
+      "content": "니콘 미러리스 중급기",
+      "price": "2,880,000원"
+    },
+    {
+      "id": 32,
+      "title": "니콘 Z5",
+      "content": "니콘 미러리스 보급기",
+      "price": "1,798,000원"
+    },
+    {
+      "id": 33,
+      "title": "니콘 Z62",
+      "content": "니콘 미러리스 중급기",
+      "price": "2,680,000원"
+    },
+    {
+      "id": 34,
+      "title": "니콘 Z72",
+      "content": "니콘 미러리스 중급기",
+      "price": "7,980,000원"
+    },
+    {
+      "id": 35,
+      "title": "니콘 Z8",
+      "content": "니콘 미러리스 고급기",
+      "price": "5,298,000원"
+    },
+    {
+      "id": 36,
+      "title": "니콘 Z9",
+      "content": "니콘 미러리스 고급기",
+      "price": "6,798,000원"
+    },
+    {
+      "id": 37,
+      "title": "후지필름 X-T30ii",
+      "content": "후지필름 미러리스 보급기",
+      "price": "1,099,000원"
+    },
+    {
+      "id": 38,
+      "title": "후지필름 X-S20",
+      "content": "후지필름 미러리스 보급기",
+      "price": "1,799,000원"
+    },
+    {
+      "id": 39,
+      "title": "후지필름 X100VI",
+      "content": "후지필름 미러리스 중급기",
+      "price": "2,099,000원"
+    },
+    {
+      "id": 40,
+      "title": "후지필름 X-T5",
+      "content": "후지필름 미러리스 고급기",
+      "price": "2,399,000원"
+    },
+    {
+      "id": 41,
+      "title": "후지필름 X-H2",
+      "content": "후지필름 미러리스 고급기",
+      "price": "2,799,000원"
+    },
+    {
+      "id": 42,
+      "title": "후지필름 X-H2S",
+      "content": "후지필름 미러리스 고급기",
+      "price": "3,340,000원"
+    },
+    {
+      "id": 43,
+      "title": "후지필름 GFX50S2",
+      "content": "후지필름 미러리스 고급기",
+      "price": "4,999,000원"
+    },
+    {
+      "id": 44,
+      "title": "후지필름 GFX100S",
+      "content": "후지필름 미러리스 고급기",
+      "price": "7,799,000원"
+    },
+    {
+      "id": 45,
+      "title": "후지필름 GFX100ii",
+      "content": "후지필름 미러리스 고급기",
+      "price": "10,499,000원"
+    },
+    {
+      "id": 46,
+      "title": "리코 GR3",
+      "content": "리코 미러리스 중급기",
+      "price": "1,630,000원"
+    },
+    {
+      "id": 47,
+      "title": "리코 GR3X",
+      "content": "리코 미러리스 중급기",
+      "price": "1,770,000원"
+    },
+    {
+      "id": 48,
+      "title": "시그마 FP",
+      "content": "시그마 미러리스 중급기",
+      "price": "1,940,000원"
+    },
+    {
+      "id": 49,
+      "title": "시그마 FPL",
+      "content": "시그마 미러리스 고급기",
+      "price": "3,150,000원"
+    },
+    {
+      "id": 50,
+      "title": "핫셀블라드 X1D 50c",
+      "content": "핫셀블라드 미러리스 고급기",
+      "price": "6,900,000원"
+    },
+    {
+      "id": 51,
+      "title": "핫셀블라드 X2D 100c",
+      "content": "핫셀블라드 미러리스 고급기",
+      "price": "13,200,000원"
     }
   ]
 }

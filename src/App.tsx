@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "./globals.css";
 import Home from "./pages/Home";
 import { Review } from "./types/Review";
+import { Route, Routes } from "react-router-dom";
+import DetailPage from "./pages/Detail";
 
 function App() {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -26,7 +28,10 @@ function App() {
 
   return (
     <div className="App">
-      <Home data={reviews} />
+      <Routes>
+        <Route path="/" element={<Home data={reviews} />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+      </Routes>
     </div>
   );
 }
