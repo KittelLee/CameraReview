@@ -1,10 +1,19 @@
 import { ViewProps } from "../types/Review";
 import { Link } from "react-router-dom";
 
-function ListView({ data = [] }: ViewProps) {
+function ListView({
+  data = [],
+  searchTerm,
+}: ViewProps & { searchTerm: string }) {
+  const filteredData = data.filter(
+    (item) =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
-      {data.map((item) => (
+      {filteredData.map((item) => (
         <Link to={`/detail/${item.id}`} key={item.id}>
           <div key={item.id} className="border-b border-gray-300 py-2">
             <h2 className="text-xl">{item.title}</h2>
@@ -16,4 +25,5 @@ function ListView({ data = [] }: ViewProps) {
     </div>
   );
 }
+
 export default ListView;

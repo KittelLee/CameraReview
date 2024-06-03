@@ -6,14 +6,19 @@ import Navbar from "./Navbar";
 
 interface HeaderProps {
   handleIconSwitch: () => void;
+  handleSearch: (term: string) => void;
 }
 
-function Header({ handleIconSwitch }: HeaderProps) {
+function Header({ handleIconSwitch, handleSearch }: HeaderProps) {
   const [switchIcon, setSwitchIcon] = useState(ListIcon);
 
   const handleButtonClick = () => {
     setSwitchIcon((prevIcon) => (prevIcon === ListIcon ? CardIcon : ListIcon));
     handleIconSwitch();
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleSearch(event.target.value);
   };
 
   return (
@@ -26,6 +31,7 @@ function Header({ handleIconSwitch }: HeaderProps) {
           type="text"
           placeholder="검색어를 넣어주세요"
           className="w-1/2 h-16 rounded-xl pl-2"
+          onChange={handleSearchChange}
         />
         <button onClick={handleButtonClick}>
           <img src={switchIcon} alt="아이콘" className="w-12 h-12" />

@@ -10,19 +10,24 @@ interface HomeProps {
 
 function Home({ data }: HomeProps) {
   const [viewMode, setViewMode] = useState("list");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleIconSwitch = () => {
     setViewMode((prevMode) => (prevMode === "list" ? "card" : "list"));
   };
 
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
+
   return (
     <div>
-      <Header handleIconSwitch={handleIconSwitch} />
+      <Header handleIconSwitch={handleIconSwitch} handleSearch={handleSearch} />
       <div className="p-4">
         {viewMode === "list" ? (
-          <ListView data={data} />
+          <ListView data={data} searchTerm={searchTerm} />
         ) : (
-          <CardView data={data} />
+          <CardView data={data} searchTerm={searchTerm} />
         )}
       </div>
     </div>
