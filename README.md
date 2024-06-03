@@ -2,7 +2,7 @@
 
 ## 회원가입이 필요 없는 익명 카메라 리뷰 게시판
 
-## React + TypeScript + Vite + TailWindCSS
+### React + TypeScript + Vite + TailWindCSS
 
 - ❗️.env파일을 일부로 .gitignore로 관리안하는 이유는 보여드리기 위함입니다.
 
@@ -11,6 +11,7 @@
   목데이터 구성 및 목서버구성
   프로젝트생성
 
-- 2일차
+- 2일차 [6/1]
 
-- 3일차
+- 3일차 [6/2]
+  README.md 초안작성

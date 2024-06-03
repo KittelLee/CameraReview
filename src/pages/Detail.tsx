@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Review } from "../types/Review";
+import { v4 as uuidv4 } from "uuid";
 
 interface Comment {
   id: number;
+  cameraId: number;
   content: string;
-  author: string;
+  authorId: string;
 }
 
 function Detail() {
@@ -14,8 +16,8 @@ function Detail() {
   const [likes, setLikes] = useState(0);
   const [rating, setRating] = useState(0);
   const [comments, setComments] = useState<Comment[]>([]);
-  const [newComment, setNewComment] = useState({ content: "", author: "" });
-  const [currentUser, setCurrentUser] = useState("");
+  const [newComment, setNewComment] = useState({ content: "", authorId: "" });
+  const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editedCommentContent, setEditedCommentContent] = useState("");
 
@@ -23,12 +25,23 @@ function Detail() {
     const fetchData = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL;
+        // 변경: fetch의 URL을 수정하여 해당 카메라의 정보를 가져옵니다.
         const response = await fetch(`${apiUrl}/camera/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
         setReview(data);
+
+        // 변경: 댓글을 가져올 때 해당 카메라의 댓글만 필터링합니다.
+        const commentsResponse = await fetch(
+          `${apiUrl}/comments?cameraId=${id}`
+        );
+        if (!commentsResponse.ok) {
+          throw new Error("Failed to fetch comments");
+        }
+        const commentsData = await commentsResponse.json();
+        setComments(commentsData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -37,46 +50,90 @@ function Detail() {
     fetchData();
   }, [id]);
 
-  const handleCommentSubmit = () => {
-    if (newComment.content.trim() !== "" && currentUser.trim() !== "") {
-      const newComments = [
-        ...comments,
-        {
-          id: comments.length + 1,
-          content: newComment.content,
-          author: currentUser,
-        },
-      ];
-      setComments(newComments);
-      setNewComment({ ...newComment, content: "" });
+  const handleCommentSubmit = async () => {
+    if (newComment.content.trim() !== "") {
+      const userId = currentUser || uuidv4(); // 사용자 ID가 없으면 새로 생성
+      setCurrentUser(userId); // 생성된 사용자 ID를 상태에 저장
+      const commentToAdd = {
+        cameraId: parseInt(id!), // 변경: id를 파싱하여 사용합니다.
+        content: newComment.content,
+        authorId: userId || "",
+      };
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL;
+        // 변경: fetch의 URL을 수정하여 댓글을 추가합니다.
+        const response = await fetch(`${apiUrl}/comments`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(commentToAdd),
+        });
+        if (!response.ok) {
+          throw new Error("Failed to add comment");
+        }
+        const savedComment = await response.json();
+        setComments([...comments, savedComment]);
+        setNewComment({ ...newComment, content: "" });
+      } catch (error) {
+        console.error("Error adding comment:", error);
+      }
     }
   };
 
   const handleEdit = (id: number) => {
     const commentToEdit = comments.find((comment) => comment.id === id);
-    if (commentToEdit && commentToEdit.author === currentUser) {
+    if (commentToEdit && commentToEdit.authorId === currentUser) {
       setEditingCommentId(id);
       setEditedCommentContent(commentToEdit.content);
     }
   };
 
-  const handleEditComplete = () => {
+  const handleEditComplete = async () => {
     if (editingCommentId !== null && editedCommentContent.trim() !== "") {
-      const updatedComments = comments.map((comment) => {
-        if (comment.id === editingCommentId) {
-          return { ...comment, content: editedCommentContent };
+      const updatedComment = {
+        content: editedCommentContent,
+      };
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const response = await fetch(`${apiUrl}/comments/${editingCommentId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedComment),
+        });
+        if (!response.ok) {
+          throw new Error("Failed to edit comment");
         }
-        return comment;
-      });
-      setComments(updatedComments);
-      setEditingCommentId(null);
-      setEditedCommentContent("");
+        const updatedComments = comments.map((comment) =>
+          comment.id === editingCommentId
+            ? { ...comment, content: editedCommentContent }
+            : comment
+        );
+        setComments(updatedComments);
+        setEditingCommentId(null);
+        setEditedCommentContent("");
+      } catch (error) {
+        console.error("Error editing comment:", error);
+      }
     }
   };
 
-  const handleDelete = (id: number) => {
-    const updatedComments = comments.filter((comment) => comment.id !== id);
-    setComments(updatedComments);
+  const handleDelete = async (id: number) => {
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${apiUrl}/comments/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete comment");
+      }
+      const updatedComments = comments.filter((comment) => comment.id !== id);
+      setComments(updatedComments);
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
   };
 
   if (!review) {
@@ -112,13 +169,6 @@ function Detail() {
           <h3 className="text-xl">Comments</h3>
           <input
             type="text"
-            value={currentUser}
-            onChange={(e) => setCurrentUser(e.target.value)}
-            className="border rounded p-2 mb-2 w-4/12"
-            placeholder="Your Name"
-          />
-          <input
-            type="text"
             value={newComment.content}
             onChange={(e) =>
               setNewComment({ ...newComment, content: e.target.value })
@@ -126,7 +176,6 @@ function Detail() {
             className="border rounded p-2 w-8/12"
             placeholder="Add a comment"
           />
-
           <button
             onClick={handleCommentSubmit}
             className="mt-2 p-2 bg-green-500 text-white rounded"
@@ -146,10 +195,10 @@ function Detail() {
                 ) : (
                   <div>
                     <p>{comment.content}</p>
-                    <p>Written by: {comment.author}</p>
+                    <p>Written Id: {comment.authorId}</p>
                   </div>
                 )}
-                {comment.author === currentUser && (
+                {comment.authorId === currentUser && (
                   <div>
                     {!editingCommentId && (
                       <button
