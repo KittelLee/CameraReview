@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Review } from "../types/Review";
-import { v4 as uuidv4 } from "uuid";
+import { v1 as uuidv1 } from "uuid";
 
 interface Comment {
   id: number;
@@ -9,6 +9,13 @@ interface Comment {
   content: string;
   authorId: string;
 }
+
+const customOptions = {
+  node: [0x01, 0x23, 0x45, 0x67, 0x89, 0xab], // 노드 ID
+  clockseq: 0x1234, // 클럭 시퀀스
+  msecs: new Date("2024-06-03").getTime(), // 시작 시간
+  nsecs: 5678, // 시작 시간에서의 추가 시간
+};
 
 function Detail() {
   const { id } = useParams<{ id: string }>();
@@ -52,8 +59,8 @@ function Detail() {
 
   const handleCommentSubmit = async () => {
     if (newComment.content.trim() !== "") {
-      const userId = currentUser || uuidv4(); // 사용자 ID가 없으면 새로 생성
-      setCurrentUser(userId); // 생성된 사용자 ID를 상태에 저장
+      const userId = currentUser || uuidv1(customOptions); // uuidv1()로 사용자 ID 생성
+      setCurrentUser(userId);
       const commentToAdd = {
         cameraId: parseInt(id!), // 변경: id를 파싱하여 사용합니다.
         content: newComment.content,
@@ -61,7 +68,6 @@ function Detail() {
       };
       try {
         const apiUrl = import.meta.env.VITE_API_URL;
-        // 변경: fetch의 URL을 수정하여 댓글을 추가합니다.
         const response = await fetch(`${apiUrl}/comments`, {
           method: "POST",
           headers: {
