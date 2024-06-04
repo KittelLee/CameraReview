@@ -8,22 +8,26 @@ interface Comment {
   cameraId: number;
   content: string;
   authorId: string;
+  rating: number; // Add rating property
 }
 
 const customOptions = {
-  node: [0x01, 0x23, 0x45, 0x67, 0x89, 0xab], // 노드 ID
-  clockseq: 0x1234, // 클럭 시퀀스
-  msecs: new Date("2024-06-03").getTime(), // 시작 시간
-  nsecs: 5678, // 시작 시간에서의 추가 시간
+  node: [0x01, 0x23, 0x45, 0x67, 0x89, 0xab],
+  clockseq: 0x1234,
+  msecs: new Date("2024-06-03").getTime(),
+  nsecs: 5678,
 };
 
 function Detail() {
   const { id } = useParams<{ id: string }>();
   const [review, setReview] = useState<Review | null>(null);
   const [likes, setLikes] = useState(0);
-  const [rating, setRating] = useState(0);
   const [comments, setComments] = useState<Comment[]>([]);
-  const [newComment, setNewComment] = useState({ content: "", authorId: "" });
+  const [newComment, setNewComment] = useState({
+    content: "",
+    authorId: "",
+    rating: 0,
+  }); // Include rating
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editedCommentContent, setEditedCommentContent] = useState("");
@@ -32,7 +36,6 @@ function Detail() {
     const fetchData = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL;
-        // 변경: fetch의 URL을 수정하여 해당 카메라의 정보를 가져옵니다.
         const response = await fetch(`${apiUrl}/camera/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -40,7 +43,6 @@ function Detail() {
         const data = await response.json();
         setReview(data);
 
-        // 변경: 댓글을 가져올 때 해당 카메라의 댓글만 필터링합니다.
         const commentsResponse = await fetch(
           `${apiUrl}/comments?cameraId=${id}`
         );
@@ -62,9 +64,10 @@ function Detail() {
       const userId = currentUser || uuidv1(customOptions); // uuidv1()로 사용자 ID 생성
       setCurrentUser(userId);
       const commentToAdd = {
-        cameraId: parseInt(id!), // 변경: id를 파싱하여 사용합니다.
+        cameraId: parseInt(id!),
         content: newComment.content,
         authorId: userId || "",
+        rating: newComment.rating, // Include rating
       };
       try {
         const apiUrl = import.meta.env.VITE_API_URL;
@@ -80,7 +83,7 @@ function Detail() {
         }
         const savedComment = await response.json();
         setComments([...comments, savedComment]);
-        setNewComment({ ...newComment, content: "" });
+        setNewComment({ content: "", authorId: "", rating: 0 }); // Reset rating
       } catch (error) {
         console.error("Error adding comment:", error);
       }
@@ -163,13 +166,16 @@ function Detail() {
           <label className="mr-2">Rating:</label>
           <input
             type="number"
-            value={rating}
-            onChange={(e) => setRating(Number(e.target.value))}
+            value={newComment.rating} // Update to use newComment.rating
+            onChange={(e) =>
+              setNewComment({ ...newComment, rating: Number(e.target.value) })
+            } // Update to handle rating input
             className="border rounded p-1"
             min="0"
             max="5"
           />
-          <span className="ml-2">{rating} / 5</span>
+          <span className="ml-2">{newComment.rating} / 5</span>{" "}
+          {/* Display the rating */}
         </div>
         <div className="mt-4">
           <h3 className="text-xl">Comments</h3>
@@ -189,8 +195,8 @@ function Detail() {
             Submit
           </button>
           <div className="mt-4">
-            {comments.map((comment, index) => (
-              <div key={index} className="border-t pt-2">
+            {comments.map((comment) => (
+              <div key={comment.id} className="border-t pt-2">
                 {editingCommentId === comment.id ? (
                   <input
                     type="text"
@@ -200,8 +206,8 @@ function Detail() {
                   />
                 ) : (
                   <div>
+                    <p>{comment.rating} / 5</p>
                     <p>{comment.content}</p>
-                    <p>Written Id: {comment.authorId}</p>
                   </div>
                 )}
                 {comment.authorId === currentUser && (

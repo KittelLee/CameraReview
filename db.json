@@ -339,30 +339,6 @@
       "authorId": "38c506c0-2188-11ef-b49d-093d848a2c6a"
     },
     {
-      "id": "3568",
-      "cameraId": 1,
-      "content": "sd",
-      "authorId": "386a162e-213c-11ef-9234-0123456789ab"
-    },
-    {
-      "id": "5f54",
-      "cameraId": 1,
-      "content": "sd",
-      "authorId": "386a162e-213c-11ef-9234-0123456789ab"
-    },
-    {
-      "id": "1736",
-      "cameraId": 1,
-      "content": "rr",
-      "authorId": "386a162e-213c-11ef-9234-0123456789ab"
-    },
-    {
-      "id": "042a",
-      "cameraId": 1,
-      "content": "ㅇ",
-      "authorId": "386a162e-213c-11ef-9234-0123456789ab"
-    },
-    {
       "id": "74f1",
       "cameraId": 2,
       "content": "hi",
@@ -375,16 +351,18 @@
       "authorId": "386a162e-213c-11ef-9234-0123456789ab"
     },
     {
-      "id": "66a1",
+      "id": "b4b8",
       "cameraId": 1,
-      "content": "ㅣol",
-      "authorId": "386a162e-213c-11ef-9234-0123456789ab"
+      "content": "kkk",
+      "authorId": "386a162e-213c-11ef-9234-0123456789ab",
+      "rating": 0
     },
     {
-      "id": "aa6c",
+      "id": "d4cc",
       "cameraId": 1,
-      "content": "ss",
-      "authorId": "386a162e-213c-11ef-9234-0123456789ab"
+      "content": "ㅅㄷ",
+      "authorId": "386a162e-213c-11ef-9234-0123456789ab",
+      "rating": 5
     }
   ]
 }
