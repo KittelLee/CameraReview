@@ -363,6 +363,27 @@
       "content": "ㅅㄷ",
       "authorId": "386a162e-213c-11ef-9234-0123456789ab",
       "rating": 5
+    },
+    {
+      "id": "2ffc",
+      "cameraId": 10,
+      "content": "hi",
+      "authorId": "386a162e-213c-11ef-9234-0123456789ab",
+      "rating": 0
+    },
+    {
+      "id": "ec6e",
+      "cameraId": 10,
+      "content": "good",
+      "authorId": "386a162e-213c-11ef-9234-0123456789ab",
+      "rating": 5
+    },
+    {
+      "id": "5152",
+      "cameraId": 10,
+      "content": "lol",
+      "authorId": "386a162e-213c-11ef-9234-0123456789ab",
+      "rating": 0
     }
   ]
 }

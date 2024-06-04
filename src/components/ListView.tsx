@@ -12,7 +12,7 @@ function ListView({
   );
 
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {filteredData.map((item) => (
         <Link to={`/detail/${item.id}`} key={item.id}>
           <div key={item.id} className="border-b border-gray-300 py-2">

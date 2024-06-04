@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Review } from "../types/Review";
 import { v1 as uuidv1 } from "uuid";
@@ -31,6 +31,12 @@ function Detail() {
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editedCommentContent, setEditedCommentContent] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate("../");
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -150,32 +156,33 @@ function Detail() {
   }
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl">{review.title}</h2>
-      <p>{review.content}</p>
-      <p>{review.price}</p>
+    <div className="p-6 bg-yellow-a flex flex-col items-center">
+      <div className="flex flex-col text-center">
+        <h2 className="text-2xl">{review.title}</h2>
+        <p>{review.content}</p>
+        <p>{review.price}</p>
+      </div>
 
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col">
         <button
           onClick={() => setLikes(likes + 1)}
-          className="mr-2 p-2 bg-blue-500 text-white rounded"
+          className="mr-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
         >
-          Like {likes}
+          좋아요 {likes}
         </button>
         <div className="mt-4">
-          <label className="mr-2">Rating:</label>
+          <label className="mr-2">별점:</label>
           <input
             type="number"
-            value={newComment.rating} // Update to use newComment.rating
+            value={newComment.rating}
             onChange={(e) =>
               setNewComment({ ...newComment, rating: Number(e.target.value) })
-            } // Update to handle rating input
+            }
             className="border rounded p-1"
             min="0"
             max="5"
           />
-          <span className="ml-2">{newComment.rating} / 5</span>{" "}
-          {/* Display the rating */}
+          <span className="ml-2">{newComment.rating} / 5</span>
         </div>
         <div className="mt-4">
           <h3 className="text-xl">Comments</h3>
@@ -185,15 +192,23 @@ function Detail() {
             onChange={(e) =>
               setNewComment({ ...newComment, content: e.target.value })
             }
-            className="border rounded p-2 w-8/12"
+            className="border rounded p-2 w-ful"
             placeholder="Add a comment"
           />
           <button
             onClick={handleCommentSubmit}
-            className="mt-2 p-2 bg-green-500 text-white rounded"
+            className="mt-2 p-2 bg-green-500 text-white rounded hover:bg-green-700"
           >
-            Submit
+            완료하기
           </button>
+          <div className="absolute top-6 right-6">
+            <button
+              className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-700"
+              onClick={handleBackClick}
+            >
+              뒤로가기
+            </button>
+          </div>
           <div className="mt-4">
             {comments.map((comment) => (
               <div key={comment.id} className="border-t pt-2">
@@ -217,7 +232,7 @@ function Detail() {
                         className="mr-2 p-1 bg-blue-500 text-white rounded-lg"
                         onClick={() => handleEdit(comment.id)}
                       >
-                        Edit
+                        수정하기
                       </button>
                     )}
                     {editingCommentId === comment.id && (
@@ -225,14 +240,14 @@ function Detail() {
                         className="mr-2 p-1 bg-green-500 text-white rounded-lg"
                         onClick={handleEditComplete}
                       >
-                        Edit Complete
+                        수정완료하기
                       </button>
                     )}
                     <button
                       className="p-1 bg-red-500 text-white rounded-lg"
                       onClick={() => handleDelete(comment.id)}
                     >
-                      Delete
+                      삭제하기
                     </button>
                   </div>
                 )}
