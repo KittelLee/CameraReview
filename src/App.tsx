@@ -18,12 +18,10 @@ function App() {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        console.log(data);
 
         if (data && Array.isArray(data) && data.length > 0) {
           setReviews(data);
           setFilteredReviews(data);
-          console.log("Received camera data:", data);
         } else {
           console.error("No camera data found in the fetched data:", data);
         }
