@@ -1,4 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+interface Camera {
+  id: string;
+  brand: string;
+  title: string;
+  content: string;
+  price: string;
+}
 
 interface FilterModalProps {
   onClose: () => void;
@@ -8,6 +16,25 @@ interface FilterModalProps {
 const FilterModal: React.FC<FilterModalProps> = ({ onClose, onApply }) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [selectedSortOption, setSelectedSortOption] = useState<string>("");
+  const [cameras, setCameras] = useState<Camera[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true); // 추가
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const response = await fetch(`${apiUrl}/camera`);
+        const data = await response.json();
+        setCameras(data.camera);
+        setIsLoading(false); // 데이터 로딩 완료 후 상태 변경
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setIsLoading(false); // 에러 발생 시에도 상태 변경
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleFilterChange = (brand: string) => {
     setSelectedFilters((prevFilters) =>
@@ -24,6 +51,10 @@ const FilterModal: React.FC<FilterModalProps> = ({ onClose, onApply }) => {
   const handleApply = () => {
     onApply(selectedFilters, selectedSortOption);
   };
+
+  const filteredCameras = cameras
+    ? cameras.filter((camera: Camera) => selectedFilters.includes(camera.brand))
+    : [];
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -76,6 +107,25 @@ const FilterModal: React.FC<FilterModalProps> = ({ onClose, onApply }) => {
           </button>
         </div>
       </div>
+      {/* 로딩 중이면 로딩 메시지 표시 */}
+      {isLoading ? (
+        <div className="bg-white rounded-lg p-6 w-1/2">
+          <h2 className="text-lg font-bold mb-4">로딩 중...</h2>
+        </div>
+      ) : (
+        // 로딩이 완료되면 카메라 목록 표시
+        <div className="bg-white rounded-lg p-6 w-1/2">
+          <h2 className="text-lg font-bold mb-4">선택된 브랜드 카메라 목록</h2>
+          <ul>
+            {filteredCameras &&
+              filteredCameras.map((camera) => (
+                <li key={camera.id}>
+                  <p>{camera.title}</p>
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
