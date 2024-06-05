@@ -379,6 +379,13 @@
       "content": "hello",
       "authorId": "386a162e-213c-11ef-9234-0123456789ab",
       "rating": 5
+    },
+    {
+      "id": "406b",
+      "cameraId": 2,
+      "content": "hi",
+      "authorId": "386a162e-213c-11ef-9234-0123456789ab",
+      "rating": 0
     }
   ]
 }
