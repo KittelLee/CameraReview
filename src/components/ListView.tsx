@@ -1,4 +1,3 @@
-// ListView.tsx
 import { ViewProps } from "../types/Review";
 import { Link } from "react-router-dom";
 
