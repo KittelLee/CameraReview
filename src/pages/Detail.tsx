@@ -156,7 +156,7 @@ function Detail() {
   }
 
   return (
-    <div className="p-6 bg-yellow-a flex flex-col items-center">
+    <div className="h-screen p-6 bg-yellow-a flex flex-col items-center">
       <div className="flex flex-col text-center">
         <h2 className="text-2xl">{review.title}</h2>
         <p>{review.content}</p>

@@ -339,18 +339,6 @@
       "authorId": "38c506c0-2188-11ef-b49d-093d848a2c6a"
     },
     {
-      "id": "74f1",
-      "cameraId": 2,
-      "content": "hi",
-      "authorId": "386a162e-213c-11ef-9234-0123456789ab"
-    },
-    {
-      "id": "e033",
-      "cameraId": 2,
-      "content": "kak",
-      "authorId": "386a162e-213c-11ef-9234-0123456789ab"
-    },
-    {
       "id": "b4b8",
       "cameraId": 1,
       "content": "kkk",
@@ -384,6 +372,13 @@
       "content": "lol",
       "authorId": "386a162e-213c-11ef-9234-0123456789ab",
       "rating": 0
+    },
+    {
+      "id": "279f",
+      "cameraId": 2,
+      "content": "hello",
+      "authorId": "386a162e-213c-11ef-9234-0123456789ab",
+      "rating": 5
     }
   ]
 }
