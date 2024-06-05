@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import { Review } from "./types/Review";
 import { Route, Routes } from "react-router-dom";
 import DetailPage from "./pages/Detail";
-import Navbar from "./components/Navbar";
 
 function App() {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -79,9 +78,8 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar onApplyFilters={handleApplyFilters} />
       <Routes>
-        <Route path="/" element={<Home data={filteredReviews} />} />
+        <Route path="/" element={<Home data={filteredReviews} onApplyFilters={handleApplyFilters} />} />
         <Route path="/detail/:id" element={<DetailPage />} />
       </Routes>
     </div>
