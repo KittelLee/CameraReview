@@ -26,8 +26,8 @@
       <th>메인 페이지</th>
     </tr>
     <tr>      
-      <td><img src="https://github.com/camerareview/assets/images/mainPage.png" height="400"></td>
-       <td><img src="https://github.com/camerareview/assets/images/detail.png"height="400"></td>   
+      <td><img src="https://github.com/KittelLee/CameraReview/assets/59171592/6803e32e-42c5-46d0-b69d-47993618605d" height="200" width="400"></td>
+       <td><img src="https://github.com/KittelLee/CameraReview/assets/59171592/11f27de1-783b-4845-8eb5-f98757a216b1"height="200" width="400"></td>   
     </tr>    
   </table>
 </div>
