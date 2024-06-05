@@ -26,12 +26,11 @@
       <th>메인 페이지</th>
     </tr>
     <tr>      
-      <td><img src="https://github.com/camerareview/assets/images/" height="400">
-</td>
-       <td><img src="https://github.com/camerareview/assets/images/"
-height="400"></td>   
+      <td><img src="https://github.com/camerareview/assets/images/mainPage.png" height="400"></td>
+       <td><img src="https://github.com/camerareview/assets/images/detail.png"height="400"></td>   
     </tr>    
-    </div>
+  </table>
+</div>
 
 ## 기술스택
 
