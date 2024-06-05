@@ -8,7 +8,7 @@ interface Comment {
   cameraId: number;
   content: string;
   authorId: string;
-  rating: number; // Add rating property
+  rating: number;
 }
 
 const customOptions = {
@@ -27,7 +27,7 @@ function Detail() {
     content: "",
     authorId: "",
     rating: 0,
-  }); // Include rating
+  });
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editedCommentContent, setEditedCommentContent] = useState("");
@@ -65,6 +65,19 @@ function Detail() {
     fetchData();
   }, [id]);
 
+  useEffect(() => {
+    const savedLikes = localStorage.getItem(`likes-${id}`);
+    if (savedLikes) {
+      setLikes(parseInt(savedLikes, 10));
+    }
+  }, [id]);
+
+  const handleLikeClick = () => {
+    const newLikes = likes + 1;
+    setLikes(newLikes);
+    localStorage.setItem(`likes-${id}`, newLikes.toString());
+  };
+
   const handleCommentSubmit = async () => {
     if (newComment.content.trim() !== "") {
       const userId = currentUser || uuidv1(customOptions); // uuidv1()로 사용자 ID 생성
@@ -73,7 +86,7 @@ function Detail() {
         cameraId: parseInt(id!),
         content: newComment.content,
         authorId: userId || "",
-        rating: newComment.rating, // Include rating
+        rating: newComment.rating,
       };
       try {
         const apiUrl = import.meta.env.VITE_API_URL;
@@ -89,7 +102,7 @@ function Detail() {
         }
         const savedComment = await response.json();
         setComments([...comments, savedComment]);
-        setNewComment({ content: "", authorId: "", rating: 0 }); // Reset rating
+        setNewComment({ content: "", authorId: "", rating: 0 });
       } catch (error) {
         console.error("Error adding comment:", error);
       }
@@ -165,7 +178,7 @@ function Detail() {
 
       <div className="mt-4 flex flex-col">
         <button
-          onClick={() => setLikes(likes + 1)}
+          onClick={handleLikeClick}
           className="mr-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
         >
           좋아요 {likes}
