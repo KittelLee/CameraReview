@@ -50,7 +50,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ onClose, onApply }) => {
           ))}
         </ul>
         <h2 className="text-lg font-bold my-4">정렬 옵션</h2>
-        {["가격높은순", "가격낮은순", "이름순", "등급순"].map((option) => (
+        {["가격높은순", "가격낮은순", "이름순"].map((option) => (
           <button
             key={option}
             className={`bg-blue-500 text-white rounded-lg px-4 py-2 mr-2 mt-1 ${

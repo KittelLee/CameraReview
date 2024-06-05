@@ -47,27 +47,20 @@ function App() {
     switch (sortOption) {
       case "가격높은순":
         filteredData.sort((a, b) => {
-          const priceA =
-            typeof a.price === "number" ? a.price : parseFloat(a.price);
-          const priceB =
-            typeof b.price === "number" ? b.price : parseFloat(b.price);
+          const priceA = parseFloat(a.price.replace(/[^\d.-]/g, ""));
+          const priceB = parseFloat(b.price.replace(/[^\d.-]/g, ""));
           return priceB - priceA;
         });
         break;
       case "가격낮은순":
         filteredData.sort((a, b) => {
-          const priceA =
-            typeof a.price === "number" ? a.price : parseFloat(a.price);
-          const priceB =
-            typeof b.price === "number" ? b.price : parseFloat(b.price);
+          const priceA = parseFloat(a.price.replace(/[^\d.-]/g, ""));
+          const priceB = parseFloat(b.price.replace(/[^\d.-]/g, ""));
           return priceA - priceB;
         });
         break;
       case "이름순":
         filteredData.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case "등급순":
-        filteredData.sort((a, b) => b.rating - a.rating);
         break;
       default:
         break;
@@ -79,7 +72,12 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home data={filteredReviews} onApplyFilters={handleApplyFilters} />} />
+        <Route
+          path="/"
+          element={
+            <Home data={filteredReviews} onApplyFilters={handleApplyFilters} />
+          }
+        />
         <Route path="/detail/:id" element={<DetailPage />} />
       </Routes>
     </div>
