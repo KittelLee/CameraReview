@@ -386,6 +386,13 @@
       "content": "hi",
       "authorId": "386a162e-213c-11ef-9234-0123456789ab",
       "rating": 0
+    },
+    {
+      "id": "2052",
+      "cameraId": 2,
+      "content": "이 카메라 좋아요!",
+      "authorId": "386a162e-213c-11ef-9234-0123456789ab",
+      "rating": 4
     }
   ]
 }
