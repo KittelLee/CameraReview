@@ -3,6 +3,8 @@ export interface Review {
   title: string;
   content: string;
   price: string;
+  brand: string;
+  rating: number;
 }
 
 export interface ViewProps {

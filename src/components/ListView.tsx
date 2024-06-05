@@ -1,14 +1,14 @@
+// ListView.tsx
 import { ViewProps } from "../types/Review";
 import { Link } from "react-router-dom";
 
-function ListView({
-  data = [],
-  searchTerm,
-}: ViewProps & { searchTerm: string }) {
-  const filteredData = data.filter(
-    (item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.content.toLowerCase().includes(searchTerm.toLowerCase())
+interface ListViewProps extends ViewProps {
+  searchTerm: string;
+}
+
+function ListView({ data = [], searchTerm }: ListViewProps) {
+  const filteredData = data.filter((item) =>
+    item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (

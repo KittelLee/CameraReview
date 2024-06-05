@@ -20,14 +20,18 @@ function Home({ data }: HomeProps) {
     setSearchTerm(term);
   };
 
+  const filteredData = data.filter((review) =>
+    review.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <Header handleIconSwitch={handleIconSwitch} handleSearch={handleSearch} />
       <div className="p-4">
         {viewMode === "list" ? (
-          <ListView data={data} searchTerm={searchTerm} />
+          <ListView data={filteredData} searchTerm={searchTerm || ""} />
         ) : (
-          <CardView data={data} searchTerm={searchTerm} />
+          <CardView data={filteredData} searchTerm={searchTerm || ""} />
         )}
       </div>
     </div>

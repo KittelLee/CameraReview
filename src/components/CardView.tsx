@@ -1,14 +1,14 @@
+// CardView.tsx
 import { ViewProps } from "../types/Review";
 import { Link } from "react-router-dom";
 
-function CardView({
-  data = [],
-  searchTerm,
-}: ViewProps & { searchTerm: string }) {
-  const filteredData = data.filter(
-    (item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.content.toLowerCase().includes(searchTerm.toLowerCase())
+interface CardViewProps extends ViewProps {
+  searchTerm: string;
+}
+
+function CardView({ data = [], searchTerm }: CardViewProps) {
+  const filteredData = data.filter((item) =>
+    item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (

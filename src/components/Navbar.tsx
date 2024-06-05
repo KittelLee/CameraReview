@@ -1,14 +1,24 @@
 import { useState } from "react";
 import FilterModal from "./FilterModal";
 
-function Navbar() {
+interface NavbarProps {
+  onApplyFilters: (filters: string[], sortOption: string) => void;
+}
+
+function Navbar({ onApplyFilters }: NavbarProps) {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+
   const handleFilterButtonClick = () => {
     setIsFilterModalOpen(true);
   };
 
   const closeFilterModal = () => {
     setIsFilterModalOpen(false);
+  };
+
+  const handleApplyFilters = (filters: string[], sortOption: string) => {
+    onApplyFilters(filters, sortOption);
+    closeFilterModal();
   };
 
   return (
@@ -21,7 +31,9 @@ function Navbar() {
           필터 & 정렬 옵션 ▼
         </button>
       </div>
-      {isFilterModalOpen && <FilterModal onClose={closeFilterModal} />}
+      {isFilterModalOpen && (
+        <FilterModal onClose={closeFilterModal} onApply={handleApplyFilters} />
+      )}
     </>
   );
 }

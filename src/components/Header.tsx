@@ -2,7 +2,6 @@ import { useState } from "react";
 import Logo from "../assets/images/logo.png";
 import ListIcon from "../assets/icons/list.svg";
 import CardIcon from "../assets/icons/card.svg";
-import Navbar from "./Navbar";
 
 interface HeaderProps {
   handleIconSwitch: () => void;
@@ -37,7 +36,6 @@ function Header({ handleIconSwitch, handleSearch }: HeaderProps) {
           <img src={switchIcon} alt="아이콘" className="w-12 h-12" />
         </button>
       </div>
-      <Navbar />
     </>
   );
 }
